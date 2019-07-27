@@ -20,16 +20,15 @@ class ViewController: UIViewController {
     var voiceAnimation = VoiceAnimation()
     var lastTransformScale: CGFloat = 0.0 //used to scale based on mic level.
     
+    //Background Animation
+    let backgroundLayer = CAGradientLayer()
     var backgroundIsExpanded = false
     var originalBackgroundLayerHeight = CGFloat()
     var dynamicBackgroundLayerHeight = CGFloat()
     var expandedBackgroundLayerHeight = CGFloat()
     
-    //Transition Animation
+    //View Controller transition Animation
     let transition = PopAnimator()
-    
-    //Haptic Feedback
-    let generator = UIImpactFeedbackGenerator(style: .medium)
     
     @IBOutlet weak var microphone: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
@@ -91,11 +90,13 @@ class ViewController: UIViewController {
                         backgroundLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: dynamicBackgroundLayerHeight)
                         if dynamicBackgroundLayerHeight >= padlock.frame.midY {
                             backgroundLayer.resizeAndMove(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: expandedBackgroundLayerHeight), animated: true, duration: 0.6)
+                            
                             let pulseCircle = PulsingCircle(numberOfPulses: 1, radius: 50, position: self.padlock.center)
                             self.view.layer.insertSublayer(pulseCircle, below: self.padlock.layer)
                             UIView.animate(withDuration: 0.3, animations: {
                                 self.padlock.tintColor = .white
                                 self.padlock.image = UIImage(named: "padlock-close")
+                                
                             }) { (sucess) in
                                 self.listButton.tintColor = .white
                                 self.pauseButton.alpha = 1
@@ -121,8 +122,6 @@ class ViewController: UIViewController {
         listButton.tintColor = Constants.pinkColor
         stopRecording()
     }
-    
-    let backgroundLayer = CAGradientLayer()
     
     func setupBackgroundLayer() {
         view.layer.insertSublayer(backgroundLayer, below: voiceAnimation.replicator)
@@ -167,7 +166,7 @@ class ViewController: UIViewController {
     
     @IBAction func didTapList(_ sender: Any) {
         
-        //present details view controller
+        //Present details view controller
         let recordingsList = storyboard!.instantiateViewController(withIdentifier: "RecordingsViewController") as! RecordingsViewController
         recordingsList.transitioningDelegate = self
         present(recordingsList, animated: true, completion: nil)

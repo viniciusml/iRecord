@@ -19,11 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="padlock-open" translatesAutoresizingMaskIntoConstraints="NO" id="zjG-eX-1iW">
-                                <rect key="frame" x="187" y="740" width="40" height="40"/>
+                                <rect key="frame" x="187" y="712" width="40" height="40"/>
                                 <color key="tintColor" red="0.0" green="0.46274509800000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microphone" translatesAutoresizingMaskIntoConstraints="NO" id="Beo-0H-Ygs">
-                                <rect key="frame" x="132.5" y="523" width="149" height="157"/>
+                                <rect key="frame" x="132.5" y="495" width="149" height="157"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.2417124212" green="0.49787652490000001" blue="0.72552102799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUK-8q-kCf">
-                                <rect key="frame" x="181" y="677" width="52" height="52"/>
+                                <rect key="frame" x="181" y="649" width="52" height="52"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="pause"/>
                                 <connections>
@@ -68,15 +68,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="153.5" id="EOF-sg-8Pd"/>
+                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="125.5" id="EOF-sg-8Pd"/>
                             <constraint firstItem="PKU-bv-GpF" firstAttribute="centerX" secondItem="Beo-0H-Ygs" secondAttribute="centerX" id="I0u-OA-oFR"/>
                             <constraint firstItem="zjG-eX-1iW" firstAttribute="centerX" secondItem="Beo-0H-Ygs" secondAttribute="centerX" id="NaZ-Pb-rOb"/>
                             <constraint firstItem="zjG-eX-1iW" firstAttribute="top" secondItem="OUK-8q-kCf" secondAttribute="bottom" constant="11" id="RIs-EH-EDd"/>
                             <constraint firstItem="zjG-eX-1iW" firstAttribute="top" secondItem="Beo-0H-Ygs" secondAttribute="bottom" constant="60" id="RND-is-sGK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zjG-eX-1iW" secondAttribute="bottom" constant="82" id="UGm-4p-PXw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zjG-eX-1iW" secondAttribute="bottom" constant="110" id="UGm-4p-PXw"/>
                             <constraint firstItem="PKU-bv-GpF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="217" id="aaq-Ay-67f"/>
                             <constraint firstItem="PKU-bv-GpF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="cGc-yz-leo"/>
-                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="top" secondItem="PKU-bv-GpF" secondAttribute="bottom" constant="31" id="eDn-Yf-CQt"/>
+                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="top" secondItem="PKU-bv-GpF" secondAttribute="bottom" constant="3" id="eDn-Yf-CQt"/>
                             <constraint firstItem="2fP-XG-HTJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="337" id="foD-6d-hI5"/>
                             <constraint firstItem="zjG-eX-1iW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="187" id="gua-wM-8tF"/>
                             <constraint firstItem="Beo-0H-Ygs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ir3-Bv-inc"/>
