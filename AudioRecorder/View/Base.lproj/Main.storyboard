@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AudioRecorder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="padlock-open" translatesAutoresizingMaskIntoConstraints="NO" id="zjG-eX-1iW">
+                                <rect key="frame" x="187" y="740" width="40" height="40"/>
+                                <color key="tintColor" red="0.0" green="0.46274509800000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microphone" translatesAutoresizingMaskIntoConstraints="NO" id="Beo-0H-Ygs">
+                                <rect key="frame" x="132.5" y="523" width="149" height="157"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.2417124212" green="0.49787652490000001" blue="0.72552102799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="157" id="Ccw-WZ-g8t"/>
+                                    <constraint firstAttribute="width" constant="149" id="gfK-VQ-IGr"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZcO-u0-6IH" appends="YES" id="l9C-6g-lxh"/>
+                                    <outletCollection property="gestureRecognizers" destination="rvR-sQ-WBm" appends="YES" id="srx-x2-qbO"/>
+                                </connections>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fP-XG-HTJ">
+                                <rect key="frame" x="337" y="816" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cAT-y9-RG7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="tintColor" red="0.1940865517" green="0.39671391249999999" blue="0.58041709659999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" image="list">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HNr-Zf-1SL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUK-8q-kCf">
+                                <rect key="frame" x="181" y="677" width="52" height="52"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="pause"/>
+                                <connections>
+                                    <action selector="recordingPaused:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FTr-o7-0d4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold the microphone to record" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKU-bv-GpF">
+                                <rect key="frame" x="29" y="261" width="356" height="231"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="33"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="153.5" id="EOF-sg-8Pd"/>
+                            <constraint firstItem="PKU-bv-GpF" firstAttribute="centerX" secondItem="Beo-0H-Ygs" secondAttribute="centerX" id="I0u-OA-oFR"/>
+                            <constraint firstItem="zjG-eX-1iW" firstAttribute="centerX" secondItem="Beo-0H-Ygs" secondAttribute="centerX" id="NaZ-Pb-rOb"/>
+                            <constraint firstItem="zjG-eX-1iW" firstAttribute="top" secondItem="OUK-8q-kCf" secondAttribute="bottom" constant="11" id="RIs-EH-EDd"/>
+                            <constraint firstItem="zjG-eX-1iW" firstAttribute="top" secondItem="Beo-0H-Ygs" secondAttribute="bottom" constant="60" id="RND-is-sGK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zjG-eX-1iW" secondAttribute="bottom" constant="82" id="UGm-4p-PXw"/>
+                            <constraint firstItem="PKU-bv-GpF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="217" id="aaq-Ay-67f"/>
+                            <constraint firstItem="PKU-bv-GpF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="cGc-yz-leo"/>
+                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="top" secondItem="PKU-bv-GpF" secondAttribute="bottom" constant="31" id="eDn-Yf-CQt"/>
+                            <constraint firstItem="2fP-XG-HTJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="337" id="foD-6d-hI5"/>
+                            <constraint firstItem="zjG-eX-1iW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="187" id="gua-wM-8tF"/>
+                            <constraint firstItem="Beo-0H-Ygs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ir3-Bv-inc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2fP-XG-HTJ" secondAttribute="trailing" constant="37" id="nj0-PP-B4Q"/>
+                            <constraint firstItem="OUK-8q-kCf" firstAttribute="centerX" secondItem="zjG-eX-1iW" secondAttribute="centerX" id="oeh-h5-YwG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2fP-XG-HTJ" secondAttribute="bottom" constant="6" id="z2h-aB-Seq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="gestureToLock" destination="rvR-sQ-WBm" id="jW8-n3-VkY"/>
+                        <outlet property="gestureToRecord" destination="ZcO-u0-6IH" id="Znl-5X-HZP"/>
+                        <outlet property="listButton" destination="2fP-XG-HTJ" id="m8L-44-QoL"/>
+                        <outlet property="microphone" destination="Beo-0H-Ygs" id="N5S-Nl-0nC"/>
+                        <outlet property="padlock" destination="zjG-eX-1iW" id="O6I-kB-oYj"/>
+                        <outlet property="pauseButton" destination="OUK-8q-kCf" id="ijn-eT-8M7"/>
+                        <outlet property="timerLabel" destination="PKU-bv-GpF" id="j4Y-OK-O6U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.10000000000000001" id="ZcO-u0-6IH">
+                    <connections>
+                        <action selector="startsRecording:" destination="BYZ-38-t0r" id="zb8-rP-WM7"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="rvR-sQ-WBm">
+                    <connections>
+                        <action selector="dragToLock:" destination="BYZ-38-t0r" id="ch2-ww-4iM"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="314.49275362318843" y="131.91964285714286"/>
+        </scene>
+        <!--Recordings View Controller-->
+        <scene sceneID="8KI-ON-CU5">
+            <objects>
+                <viewController storyboardIdentifier="RecordingsViewController" id="1QS-1l-kj3" customClass="RecordingsViewController" customModule="AudioRecorder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OVs-Vx-8fS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fY0-w5-7QP">
+                                <rect key="frame" x="0.0" y="34" width="414" height="767"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="6V3-vi-lFN" customClass="RecordingsTableViewCell" customModule="AudioRecorder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="cell" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6V3-vi-lFN" id="yG2-kz-n9I">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSh-EG-J1B">
+                                                    <rect key="frame" x="39" y="8" width="209" height="42"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="209" id="MhT-xB-0Wi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="24"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfp-8Y-A66">
+                                                    <rect key="frame" x="42" y="32" width="64" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="38" id="9fV-uX-LoH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="24"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mwi-p9-hAk">
+                                                    <rect key="frame" x="312" y="30.5" width="56" height="38.5"/>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="Play">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapButton:" destination="6V3-vi-lFN" eventType="touchUpInside" id="BAy-Pf-gSh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Mwi-p9-hAk" secondAttribute="trailing" constant="26" id="Hcd-4E-tl6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Mwi-p9-hAk" secondAttribute="bottom" constant="20" id="M9H-Er-ipp"/>
+                                                <constraint firstItem="pSh-EG-J1B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sfp-8Y-A66" secondAttribute="leading" constant="-3" id="XM5-rd-b9R"/>
+                                                <constraint firstItem="sfp-8Y-A66" firstAttribute="top" secondItem="pSh-EG-J1B" secondAttribute="bottom" constant="-18" id="YFj-ST-2PO"/>
+                                                <constraint firstItem="sfp-8Y-A66" firstAttribute="bottom" secondItem="yG2-kz-n9I" secondAttribute="bottomMargin" constant="-19" id="jMe-u9-fgX"/>
+                                                <constraint firstItem="Mwi-p9-hAk" firstAttribute="leading" secondItem="sfp-8Y-A66" secondAttribute="trailing" constant="206" id="jsi-2z-xAv"/>
+                                                <constraint firstItem="Mwi-p9-hAk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pSh-EG-J1B" secondAttribute="trailing" constant="8" symbolic="YES" id="oaS-wZ-j6W"/>
+                                                <constraint firstItem="pSh-EG-J1B" firstAttribute="leading" secondItem="yG2-kz-n9I" secondAttribute="leadingMargin" constant="19" id="u0o-z3-85z"/>
+                                                <constraint firstItem="pSh-EG-J1B" firstAttribute="top" secondItem="yG2-kz-n9I" secondAttribute="topMargin" constant="-3" id="yyl-pP-9r3"/>
+                                                <constraint firstItem="Mwi-p9-hAk" firstAttribute="centerY" secondItem="yG2-kz-n9I" secondAttribute="centerY" id="yzP-9R-CXl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="playButton" destination="Mwi-p9-hAk" id="f80-Lg-5zF"/>
+                                            <outlet property="recordingDuration" destination="sfp-8Y-A66" id="Nzh-P2-M1f"/>
+                                            <outlet property="recordingTitle" destination="pSh-EG-J1B" id="jKd-kV-q9i"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1QS-1l-kj3" id="d4n-cb-6hy"/>
+                                    <outlet property="delegate" destination="1QS-1l-kj3" id="Vb4-ik-NAM"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fY0-w5-7QP" secondAttribute="bottom" constant="95" id="QLH-2d-KUe"/>
+                            <constraint firstItem="fY0-w5-7QP" firstAttribute="top" secondItem="OVs-Vx-8fS" secondAttribute="top" constant="34" id="gqN-fY-Zxt"/>
+                            <constraint firstAttribute="trailing" secondItem="fY0-w5-7QP" secondAttribute="trailing" id="uj9-jK-Oou"/>
+                            <constraint firstItem="fY0-w5-7QP" firstAttribute="leading" secondItem="OVs-Vx-8fS" secondAttribute="leading" id="zwy-jV-e5C"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Itx-56-hnV"/>
+                    </view>
+                    <connections>
+                        <outlet property="recordingsList" destination="fY0-w5-7QP" id="u4b-7T-49a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rjW-FF-dTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1175.3623188405797" y="124.55357142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="list" width="100" height="100"/>
+        <image name="microphone" width="64" height="64"/>
+        <image name="padlock-open" width="128" height="128"/>
+        <image name="pause" width="52" height="52"/>
+    </resources>
+    <color key="tintColor" red="0.1940865517" green="0.39671391249999999" blue="0.58041709659999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+</document>
