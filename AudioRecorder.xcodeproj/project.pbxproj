@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F0FA33C251E02E000D144CF /* MicrophoneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0FA33B251E02E000D144CF /* MicrophoneDelegate.swift */; };
+		8F0FA33E251E033C00D144CF /* PlayAudioDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0FA33D251E033C00D144CF /* PlayAudioDelegate.swift */; };
 		8F28B6DA22E217480042B5B1 /* Microphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F28B6D922E217480042B5B1 /* Microphone.swift */; };
 		8F28B6DC22E350120042B5B1 /* VoiceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F28B6DB22E350120042B5B1 /* VoiceAnimation.swift */; };
 		8F28B6DE22E35EAC0042B5B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F28B6DD22E35EAC0042B5B1 /* Constants.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F0FA33B251E02E000D144CF /* MicrophoneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophoneDelegate.swift; sourceTree = "<group>"; };
+		8F0FA33D251E033C00D144CF /* PlayAudioDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudioDelegate.swift; sourceTree = "<group>"; };
 		8F28B6D922E217480042B5B1 /* Microphone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Microphone.swift; sourceTree = "<group>"; };
 		8F28B6DB22E350120042B5B1 /* VoiceAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceAnimation.swift; sourceTree = "<group>"; };
 		8F28B6DD22E35EAC0042B5B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				8F28B6DB22E350120042B5B1 /* VoiceAnimation.swift */,
 				8F28B6DF22E490760042B5B1 /* PulsingCircle.swift */,
 				8F28B6E322E5A2E30042B5B1 /* PopAnimator.swift */,
+				8F0FA33B251E02E000D144CF /* MicrophoneDelegate.swift */,
+				8F0FA33D251E033C00D144CF /* PlayAudioDelegate.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -216,8 +222,10 @@
 			files = (
 				8F28B6E422E5A2E30042B5B1 /* PopAnimator.swift in Sources */,
 				8F9F3C5F22DB8BB4008C3A2B /* RecVC+PlayAudio.swift in Sources */,
+				8F0FA33C251E02E000D144CF /* MicrophoneDelegate.swift in Sources */,
 				8F28B6DE22E35EAC0042B5B1 /* Constants.swift in Sources */,
 				8F28B6E022E490760042B5B1 /* PulsingCircle.swift in Sources */,
+				8F0FA33E251E033C00D144CF /* PlayAudioDelegate.swift in Sources */,
 				8FB658DF22DA0F8900CAD1D9 /* RecordingsViewController.swift in Sources */,
 				8FB658CC22D9CE1F00CAD1D9 /* ViewController.swift in Sources */,
 				8FB658DD22D9D3E900CAD1D9 /* Helpers.swift in Sources */,
