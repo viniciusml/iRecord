@@ -27,11 +27,18 @@
 		8FB658DF22DA0F8900CAD1D9 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658DE22DA0F8900CAD1D9 /* RecordingsViewController.swift */; };
 		8FB658E122DA308D00CAD1D9 /* RecordingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658E022DA308D00CAD1D9 /* RecordingsTableViewCell.swift */; };
 		8FB658E322DA418000CAD1D9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658E222DA418000CAD1D9 /* Model.swift */; };
+		D80F3E86260951640086BEBA /* RecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F3E85260951640086BEBA /* RecorderTests.swift */; };
 		D8A9F0922609436F00FD8969 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A9F0892609436F00FD8969 /* Engine.framework */; };
-		D8A9F0992609436F00FD8969 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = D8A9F08B2609436F00FD8969 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D80F3E88260951650086BEBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8FB658BE22D9CE1F00CAD1D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8FB658C522D9CE1F00CAD1D9;
+			remoteInfo = AudioRecorder;
+		};
 		D8A9F0932609436F00FD8969 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8FB658BE22D9CE1F00CAD1D9 /* Project object */;
@@ -64,8 +71,10 @@
 		8FB658DE22DA0F8900CAD1D9 /* RecordingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
 		8FB658E022DA308D00CAD1D9 /* RecordingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewCell.swift; sourceTree = "<group>"; };
 		8FB658E222DA418000CAD1D9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D80F3E83260951640086BEBA /* AudioRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D80F3E85260951640086BEBA /* RecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderTests.swift; sourceTree = "<group>"; };
+		D80F3E87260951650086BEBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8A9F0892609436F00FD8969 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8A9F08B2609436F00FD8969 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		D8A9F08C2609436F00FD8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8A9F0912609436F00FD8969 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A9F0982609436F00FD8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +82,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		8FB658C322D9CE1F00CAD1D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D80F3E80260951640086BEBA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -155,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				8FB658C822D9CE1F00CAD1D9 /* AudioRecorder */,
+				D80F3E84260951640086BEBA /* AudioRecorderTests */,
 				D8A9F08A2609436F00FD8969 /* Engine */,
 				D8A9F0952609436F00FD8969 /* EngineTests */,
 				8FB658C722D9CE1F00CAD1D9 /* Products */,
@@ -167,6 +184,7 @@
 				8FB658C622D9CE1F00CAD1D9 /* AudioRecorder.app */,
 				D8A9F0892609436F00FD8969 /* Engine.framework */,
 				D8A9F0912609436F00FD8969 /* EngineTests.xctest */,
+				D80F3E83260951640086BEBA /* AudioRecorderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,10 +203,18 @@
 			path = AudioRecorder;
 			sourceTree = "<group>";
 		};
+		D80F3E84260951640086BEBA /* AudioRecorderTests */ = {
+			isa = PBXGroup;
+			children = (
+				D80F3E85260951640086BEBA /* RecorderTests.swift */,
+				D80F3E87260951650086BEBA /* Info.plist */,
+			);
+			path = AudioRecorderTests;
+			sourceTree = "<group>";
+		};
 		D8A9F08A2609436F00FD8969 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				D8A9F08B2609436F00FD8969 /* Engine.h */,
 				D8A9F08C2609436F00FD8969 /* Info.plist */,
 			);
 			path = Engine;
@@ -209,7 +235,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8A9F0992609436F00FD8969 /* Engine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +257,24 @@
 			productName = AudioRecorder;
 			productReference = 8FB658C622D9CE1F00CAD1D9 /* AudioRecorder.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D80F3E82260951640086BEBA /* AudioRecorderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D80F3E8A260951650086BEBA /* Build configuration list for PBXNativeTarget "AudioRecorderTests" */;
+			buildPhases = (
+				D80F3E7F260951640086BEBA /* Sources */,
+				D80F3E80260951640086BEBA /* Frameworks */,
+				D80F3E81260951640086BEBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D80F3E89260951650086BEBA /* PBXTargetDependency */,
+			);
+			name = AudioRecorderTests;
+			productName = AudioRecorderTests;
+			productReference = D80F3E83260951640086BEBA /* AudioRecorderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D8A9F0882609436F00FD8969 /* Engine */ = {
 			isa = PBXNativeTarget;
@@ -282,11 +325,16 @@
 					8FB658C522D9CE1F00CAD1D9 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					D80F3E82260951640086BEBA = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 8FB658C522D9CE1F00CAD1D9;
+					};
 					D8A9F0882609436F00FD8969 = {
 						CreatedOnToolsVersion = 12.2;
 					};
 					D8A9F0902609436F00FD8969 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -306,6 +354,7 @@
 				8FB658C522D9CE1F00CAD1D9 /* AudioRecorder */,
 				D8A9F0882609436F00FD8969 /* Engine */,
 				D8A9F0902609436F00FD8969 /* EngineTests */,
+				D80F3E82260951640086BEBA /* AudioRecorderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +367,13 @@
 				8FB658D422D9CE2100CAD1D9 /* LaunchScreen.storyboard in Resources */,
 				8FB658D122D9CE2100CAD1D9 /* Assets.xcassets in Resources */,
 				8FB658CF22D9CE1F00CAD1D9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D80F3E81260951640086BEBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +418,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D80F3E7F260951640086BEBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D80F3E86260951640086BEBA /* RecorderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8A9F0852609436F00FD8969 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,6 +443,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D80F3E89260951650086BEBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8FB658C522D9CE1F00CAD1D9 /* AudioRecorder */;
+			targetProxy = D80F3E88260951650086BEBA /* PBXContainerItemProxy */;
+		};
 		D8A9F0942609436F00FD8969 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D8A9F0882609436F00FD8969 /* Engine */;
@@ -535,7 +604,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = example.AudioRecorder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -553,10 +622,52 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = example.AudioRecorder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D80F3E8B260951650086BEBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3SNY4A7B39;
+				INFOPLIST_FILE = AudioRecorderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal.AudioRecorderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioRecorder.app/AudioRecorder";
+			};
+			name = Debug;
+		};
+		D80F3E8C260951650086BEBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3SNY4A7B39;
+				INFOPLIST_FILE = AudioRecorderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal.AudioRecorderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioRecorder.app/AudioRecorder";
 			};
 			name = Release;
 		};
@@ -621,6 +732,7 @@
 		D8A9F09E2609436F00FD8969 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3SNY4A7B39;
@@ -634,6 +746,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal.EngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "EngineTests/EngineTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -641,6 +755,7 @@
 		D8A9F09F2609436F00FD8969 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3SNY4A7B39;
@@ -654,6 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.viniciusLeal.EngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "EngineTests/EngineTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -675,6 +791,15 @@
 			buildConfigurations = (
 				8FB658D922D9CE2100CAD1D9 /* Debug */,
 				8FB658DA22D9CE2100CAD1D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D80F3E8A260951650086BEBA /* Build configuration list for PBXNativeTarget "AudioRecorderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D80F3E8B260951650086BEBA /* Debug */,
+				D80F3E8C260951650086BEBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
