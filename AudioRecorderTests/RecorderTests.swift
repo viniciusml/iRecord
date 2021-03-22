@@ -16,13 +16,19 @@ protocol AudioSession {
 
 extension AVAudioSession: AudioSession {}
 
+extension AudioSession {
+    var needsRecordPermissionRequest: Bool {
+        recordPermission != .granted
+    }
+}
+
 class Recorder {
     private let session: AudioSession
     
     init(session: AudioSession = AVAudioSession.sharedInstance()) {
         self.session = session
         
-        if session.recordPermission != .granted {
+        if session.needsRecordPermissionRequest {
             session.requestRecordPermission { _ in }
         }
     }
@@ -31,23 +37,26 @@ class Recorder {
 class RecorderTests: XCTestCase {
     
     func test_init_requestsPermissionWhenNotGranted() {
-        let session1 = AudioSessionSpy(.undetermined)
-        _ = Recorder(session: session1)
+        let (session1, _) = makeSUT(.undetermined)
         
         XCTAssertEqual(session1.requestRecordPermissionCount, 1)
         
-        let session2 = AudioSessionSpy(.denied)
-        _ = Recorder(session: session2)
+        let (session2, _) = makeSUT(.denied)
 
         XCTAssertEqual(session2.requestRecordPermissionCount, 1)
 
-        let session3 = AudioSessionSpy(.granted)
-        _ = Recorder(session: session3)
+        let (session3, _) = makeSUT(.granted)
 
         XCTAssertEqual(session3.requestRecordPermissionCount, 0)
     }
     
     // MARK: Helpers
+    
+    private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AudioSessionSpy, Recorder) {
+        let session = AudioSessionSpy(permission)
+        let sut = Recorder(session: session)
+        return (session, sut)
+    }
     
     private class AudioSessionSpy: AudioSession {
         private let stubbedPermission: AVAudioSession.RecordPermission
