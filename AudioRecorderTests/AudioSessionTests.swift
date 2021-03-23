@@ -12,6 +12,7 @@ import XCTest
 protocol Session {
     var recordPermission: AVAudioSession.RecordPermission { get }
     func requestRecordPermission(_ response: @escaping (Bool) -> Void)
+    func setCategory(_ category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions) throws
 }
 
 extension AVAudioSession: Session {}
@@ -25,10 +26,11 @@ extension Session {
 class AudioSession {
     private let session: Session
     
-    init(session: Session = AVAudioSession.sharedInstance()) {
+    init(session: Session = AVAudioSession.sharedInstance()) throws {
         self.session = session
         
         requestPermissionIfNeeded()
+        try session.setCategory(.playAndRecord, mode: .default, options: [])
     }
     
     private func requestPermissionIfNeeded() {
@@ -54,17 +56,26 @@ class AudioSessionTests: XCTestCase {
         XCTAssertEqual(session3.requestRecordPermissionCount, 0)
     }
     
+    func test_init_failsToSetCategory() {
+        let session = AVAudioSessionSpy(.granted)
+        session.stubbedError = NSError(domain: "initialisation error", code: 0)
+        
+        XCTAssertThrowsError(try AudioSession(session: session))
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AVAudioSessionSpy, AudioSession) {
         let session = AVAudioSessionSpy(permission)
-        let sut = AudioSession(session: session)
+        let sut = try! AudioSession(session: session)
         return (session, sut)
     }
     
     private class AVAudioSessionSpy: Session {
         private let stubbedPermission: AVAudioSession.RecordPermission
         private var requestRecordPermissionResponses = [((Bool) -> Void)]()
+        private(set) var categories = [(category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions)]()
+        var stubbedError: Error?
         
         var requestRecordPermissionCount: Int {
             requestRecordPermissionResponses.count
@@ -80,6 +91,13 @@ class AudioSessionTests: XCTestCase {
         
         func requestRecordPermission(_ response: @escaping (Bool) -> Void) {
             requestRecordPermissionResponses.append(response)
+        }
+        
+        func setCategory(_ category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions) throws {
+            if let error = stubbedError {
+                throw error
+            }
+            categories.append((category, mode, options))
         }
     }
 }
