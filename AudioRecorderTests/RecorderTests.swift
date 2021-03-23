@@ -28,9 +28,13 @@ class Recorder {
     init(session: AudioSession = AVAudioSession.sharedInstance()) {
         self.session = session
         
-        if session.needsRecordPermissionRequest {
-            session.requestRecordPermission { _ in }
-        }
+        requestPermissionIfNeeded()
+    }
+    
+    private func requestPermissionIfNeeded() {
+        guard session.needsRecordPermissionRequest else { return }
+        
+        session.requestRecordPermission { _ in }
     }
 }
 
