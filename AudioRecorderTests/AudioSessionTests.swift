@@ -73,6 +73,18 @@ class AudioSessionTests: XCTestCase {
         XCTAssertTrue(permissionCallbackCalled)
     }
     
+    func test_permissionGranted_doesNotDelegateMessage() {
+        var permissionCallbackCalled = false
+        let (session, sut) = makeSUT(.undetermined, onPermissionDenied: {
+            permissionCallbackCalled.toggle()
+        })
+        
+        sut.requestPermissionIfNeeded()
+        session.completeWithPermission(true)
+        
+        XCTAssertFalse(permissionCallbackCalled)
+    }
+    
     func test_init_failsToSetCategory() {
         let session = AVAudioSessionSpy(.granted)
         session.stubbedError = NSError(domain: "initialisation error", code: 0)
