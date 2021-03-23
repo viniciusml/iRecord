@@ -63,6 +63,17 @@ class AudioSessionTests: XCTestCase {
         XCTAssertThrowsError(try AudioSession(session: session))
     }
     
+    func test_init_setsCategoty() throws {
+        let (session, _) = makeSUT(.granted)
+        
+        XCTAssertEqual(session.categories.count, 1)
+        let tuple = try XCTUnwrap(session.categories.first)
+        
+        XCTAssertEqual(tuple.category, .playAndRecord)
+        XCTAssertEqual(tuple.mode, .default)
+        XCTAssertTrue(tuple.options.isEmpty)
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AVAudioSessionSpy, AudioSession) {
