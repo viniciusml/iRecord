@@ -25,42 +25,59 @@ extension Session {
 
 class AudioSession {
     private let session: Session
+    private let onPermissionDenied: () -> Void
     
-    init(session: Session = AVAudioSession.sharedInstance()) throws {
+    init(session: Session = AVAudioSession.sharedInstance(), onPermissionDenied: @escaping () -> Void) throws {
         self.session = session
+        self.onPermissionDenied = onPermissionDenied
         
-        requestPermissionIfNeeded()
         try session.setCategory(.playAndRecord, mode: .default, options: [])
     }
     
-    private func requestPermissionIfNeeded() {
+    func requestPermissionIfNeeded() {
         guard session.needsRecordPermissionRequest else { return }
         
-        session.requestRecordPermission { _ in }
+        session.requestRecordPermission { permission in
+            if permission == false {
+                self.onPermissionDenied()
+            }
+        }
     }
 }
 
 class AudioSessionTests: XCTestCase {
     
     func test_init_requestsPermissionWhenNotGranted() {
-        let (session1, _) = makeSUT(.undetermined)
-        
+        let (session1, sut1) = makeSUT(.undetermined)
+        sut1.requestPermissionIfNeeded()
         XCTAssertEqual(session1.requestRecordPermissionCount, 1)
         
-        let (session2, _) = makeSUT(.denied)
-
+        let (session2, sut2) = makeSUT(.denied)
+        sut2.requestPermissionIfNeeded()
         XCTAssertEqual(session2.requestRecordPermissionCount, 1)
 
-        let (session3, _) = makeSUT(.granted)
-
+        let (session3, sut3) = makeSUT(.granted)
+        sut3.requestPermissionIfNeeded()
         XCTAssertEqual(session3.requestRecordPermissionCount, 0)
+    }
+    
+    func test_permissionNotGranted_delegatesMessage() {
+        var permissionCallbackCalled = false
+        let (session, sut) = makeSUT(.undetermined, onPermissionDenied: {
+            permissionCallbackCalled.toggle()
+        })
+        
+        sut.requestPermissionIfNeeded()
+        session.completeWithPermission(false)
+        
+        XCTAssertTrue(permissionCallbackCalled)
     }
     
     func test_init_failsToSetCategory() {
         let session = AVAudioSessionSpy(.granted)
         session.stubbedError = NSError(domain: "initialisation error", code: 0)
         
-        XCTAssertThrowsError(try AudioSession(session: session))
+        XCTAssertThrowsError(try AudioSession(session: session, onPermissionDenied: {}))
     }
     
     func test_init_setsCategoty() throws {
@@ -76,9 +93,9 @@ class AudioSessionTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AVAudioSessionSpy, AudioSession) {
+    private func makeSUT(_ permission: AVAudioSession.RecordPermission, onPermissionDenied: @escaping () -> Void = {}) -> (AVAudioSessionSpy, AudioSession) {
         let session = AVAudioSessionSpy(permission)
-        let sut = try! AudioSession(session: session)
+        let sut = try! AudioSession(session: session, onPermissionDenied: onPermissionDenied)
         return (session, sut)
     }
     
@@ -102,6 +119,10 @@ class AudioSessionTests: XCTestCase {
         
         func requestRecordPermission(_ response: @escaping (Bool) -> Void) {
             requestRecordPermissionResponses.append(response)
+        }
+        
+        func completeWithPermission(_ response: Bool, at index: Int = 0) {
+            requestRecordPermissionResponses[index](response)
         }
         
         func setCategory(_ category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions) throws {
