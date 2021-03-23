@@ -54,24 +54,30 @@ extension AudioRecorder: AVAudioRecorderDelegate {}
 class AudioRecorderTests: XCTestCase {
     
     func test_init_setsDelegate() throws {
-        let recorder = try AudioRecorderSpy()
-        let sut = AudioRecorder(recorder: recorder)
+        let (recorder, sut) = makeSUT()
         
         XCTAssertTrue(recorder.delegate === sut)
     }
     
     func test_start_forwardsMessage() throws {
-        let recorder = try AudioRecorderSpy()
-        let sut = AudioRecorder(recorder: recorder)
+        let (recorder, sut) = makeSUT()
         
         sut.start()
         
         XCTAssertEqual(recorder.messages, [.record, .prepareToRecord])
         XCTAssertTrue(recorder.isMeteringEnabled)
     }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT() -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
+        let recorder = try! AVAudioRecorderSpy()
+        let sut = AudioRecorder(recorder: recorder)
+        return (recorder, sut)
+    }
 }
 
-class AudioRecorderSpy: Recorder {
+class AVAudioRecorderSpy: Recorder {
     enum Message {
         case record, prepareToRecord
     }
