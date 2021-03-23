@@ -47,7 +47,7 @@ class AudioSession {
 
 class AudioSessionTests: XCTestCase {
     
-    func test_init_requestsPermissionWhenNotGranted() {
+    func test_requestPermissionIfNeeded_requestsPermissionWhenNotGranted() {
         let (session1, sut1) = makeSUT(.undetermined)
         sut1.requestPermissionIfNeeded()
         XCTAssertEqual(session1.requestRecordPermissionCount, 1)
