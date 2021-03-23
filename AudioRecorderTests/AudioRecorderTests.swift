@@ -70,9 +70,11 @@ class AudioRecorderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT() -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
         let recorder = try! AVAudioRecorderSpy()
         let sut = AudioRecorder(recorder: recorder)
+        trackForMemoryLeaks(recorder, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return (recorder, sut)
     }
 }
@@ -86,7 +88,7 @@ class AVAudioRecorderSpy: Recorder {
     private let settings: [String : Any]
     var isMeteringEnabled: Bool = false
     
-    var delegate: AVAudioRecorderDelegate?
+    weak var delegate: AVAudioRecorderDelegate?
     
     private(set) var messages = [Message]()
     
