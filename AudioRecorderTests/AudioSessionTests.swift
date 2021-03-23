@@ -37,9 +37,9 @@ class AudioSession {
     func requestPermissionIfNeeded() {
         guard session.needsRecordPermissionRequest else { return }
         
-        session.requestRecordPermission { permission in
+        session.requestRecordPermission { [weak self] permission in
             if permission == false {
-                self.onPermissionDenied()
+                self?.onPermissionDenied()
             }
         }
     }
@@ -105,9 +105,11 @@ class AudioSessionTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT(_ permission: AVAudioSession.RecordPermission, onPermissionDenied: @escaping () -> Void = {}) -> (AVAudioSessionSpy, AudioSession) {
+    private func makeSUT(_ permission: AVAudioSession.RecordPermission, onPermissionDenied: @escaping () -> Void = {}, file: StaticString = #filePath, line: UInt = #line) -> (AVAudioSessionSpy, AudioSession) {
         let session = AVAudioSessionSpy(permission)
         let sut = try! AudioSession(session: session, onPermissionDenied: onPermissionDenied)
+        trackForMemoryLeaks(session, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return (session, sut)
     }
     
@@ -146,3 +148,10 @@ class AudioSessionTests: XCTestCase {
     }
 }
 
+extension XCTestCase {
+    func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
+    }
+}
