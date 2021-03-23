@@ -1,6 +1,6 @@
 //
-//  RecorderTests.swift
-//  RecorderTests
+//  AudioSessionTests.swift
+//  AudioSessionTests
 //
 //  Created by Vinicius Moreira Leal on 22/03/2021.
 //  Copyright © 2021 Vinicius Leal. All rights reserved.
@@ -9,23 +9,23 @@
 import AVFoundation
 import XCTest
 
-protocol AudioSession {
+protocol Session {
     var recordPermission: AVAudioSession.RecordPermission { get }
     func requestRecordPermission(_ response: @escaping (Bool) -> Void)
 }
 
-extension AVAudioSession: AudioSession {}
+extension AVAudioSession: Session {}
 
-extension AudioSession {
+extension Session {
     var needsRecordPermissionRequest: Bool {
         recordPermission != .granted
     }
 }
 
-class Recorder {
-    private let session: AudioSession
+class AudioSession {
+    private let session: Session
     
-    init(session: AudioSession = AVAudioSession.sharedInstance()) {
+    init(session: Session = AVAudioSession.sharedInstance()) {
         self.session = session
         
         requestPermissionIfNeeded()
@@ -38,7 +38,7 @@ class Recorder {
     }
 }
 
-class RecorderTests: XCTestCase {
+class AudioSessionTests: XCTestCase {
     
     func test_init_requestsPermissionWhenNotGranted() {
         let (session1, _) = makeSUT(.undetermined)
@@ -56,13 +56,13 @@ class RecorderTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AudioSessionSpy, Recorder) {
-        let session = AudioSessionSpy(permission)
-        let sut = Recorder(session: session)
+    private func makeSUT(_ permission: AVAudioSession.RecordPermission) -> (AVAudioSessionSpy, AudioSession) {
+        let session = AVAudioSessionSpy(permission)
+        let sut = AudioSession(session: session)
         return (session, sut)
     }
     
-    private class AudioSessionSpy: AudioSession {
+    private class AVAudioSessionSpy: Session {
         private let stubbedPermission: AVAudioSession.RecordPermission
         private var requestRecordPermissionResponses = [((Bool) -> Void)]()
         

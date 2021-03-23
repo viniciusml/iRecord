@@ -27,7 +27,7 @@
 		8FB658DF22DA0F8900CAD1D9 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658DE22DA0F8900CAD1D9 /* RecordingsViewController.swift */; };
 		8FB658E122DA308D00CAD1D9 /* RecordingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658E022DA308D00CAD1D9 /* RecordingsTableViewCell.swift */; };
 		8FB658E322DA418000CAD1D9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB658E222DA418000CAD1D9 /* Model.swift */; };
-		D80F3E86260951640086BEBA /* RecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F3E85260951640086BEBA /* RecorderTests.swift */; };
+		D80F3E86260951640086BEBA /* AudioSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F3E85260951640086BEBA /* AudioSessionTests.swift */; };
 		D8A9F0922609436F00FD8969 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A9F0892609436F00FD8969 /* Engine.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,7 @@
 		8FB658E022DA308D00CAD1D9 /* RecordingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsTableViewCell.swift; sourceTree = "<group>"; };
 		8FB658E222DA418000CAD1D9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D80F3E83260951640086BEBA /* AudioRecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioRecorderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D80F3E85260951640086BEBA /* RecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderTests.swift; sourceTree = "<group>"; };
+		D80F3E85260951640086BEBA /* AudioSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionTests.swift; sourceTree = "<group>"; };
 		D80F3E87260951650086BEBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8A9F0892609436F00FD8969 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A9F08C2609436F00FD8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		D80F3E84260951640086BEBA /* AudioRecorderTests */ = {
 			isa = PBXGroup;
 			children = (
-				D80F3E85260951640086BEBA /* RecorderTests.swift */,
+				D80F3E85260951640086BEBA /* AudioSessionTests.swift */,
 				D80F3E87260951650086BEBA /* Info.plist */,
 			);
 			path = AudioRecorderTests;
@@ -422,7 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D80F3E86260951640086BEBA /* RecorderTests.swift in Sources */,
+				D80F3E86260951640086BEBA /* AudioSessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
