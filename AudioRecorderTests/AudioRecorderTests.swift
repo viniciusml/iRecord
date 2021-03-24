@@ -15,6 +15,7 @@ protocol Recorder: class {
     init(url: URL, settings: [String : Any]) throws
     @discardableResult func record() -> Bool
     @discardableResult func prepareToRecord() -> Bool
+    func stop()
 }
 
 extension AVAudioRecorder: Recorder {}
@@ -47,6 +48,10 @@ class AudioRecorder: NSObject {
         recorder.prepareToRecord()
         recorder.isMeteringEnabled = true
     }
+    
+    func stop() {
+        recorder.stop()
+    }
 }
 
 extension AudioRecorder: AVAudioRecorderDelegate {}
@@ -59,13 +64,22 @@ class AudioRecorderTests: XCTestCase {
         XCTAssertTrue(recorder.delegate === sut)
     }
     
-    func test_start_forwardsMessage() throws {
+    func test_start_beginsRecording() throws {
         let (recorder, sut) = makeSUT()
         
         sut.start()
         
         XCTAssertEqual(recorder.messages, [.record, .prepareToRecord])
         XCTAssertTrue(recorder.isMeteringEnabled)
+    }
+    
+    func test_stop_finishesRecording() throws {
+        let (recorder, sut) = makeSUT()
+        
+        sut.start()
+        sut.stop()
+        
+        XCTAssertEqual(recorder.messages, [.record, .prepareToRecord, .stop])
     }
     
     // MARK: - Helpers
@@ -81,7 +95,7 @@ class AudioRecorderTests: XCTestCase {
 
 class AVAudioRecorderSpy: Recorder {
     enum Message {
-        case record, prepareToRecord
+        case record, prepareToRecord, stop
     }
     
     private let url: URL
@@ -105,6 +119,10 @@ class AVAudioRecorderSpy: Recorder {
     func prepareToRecord() -> Bool {
         messages.append(.prepareToRecord)
         return true
+    }
+    
+    func stop() {
+        messages.append(.stop)
     }
 }
 
