@@ -35,6 +35,7 @@ struct AudioRecorderFactory {
 
 class AudioRecorder: NSObject {
     private let recorder: Recorder
+    var onRecordCompletion: ((Bool) -> Void)?
     
     init(recorder: Recorder) {
         self.recorder = recorder
@@ -82,6 +83,30 @@ class AudioRecorderTests: XCTestCase {
         XCTAssertEqual(recorder.messages, [.record, .prepareToRecord, .stop])
     }
     
+    func test_stopWithSuccess_notifiesCallback() {
+        let (recorder, sut) = makeSUT()
+        
+        sut.start()
+        sut.stop()
+        recorder.completeWith(flag: true)
+        
+        sut.onRecordCompletion = { flag in
+            XCTAssertTrue(flag)
+        }
+    }
+    
+    func test_stopWithFailure_notifiesCallback() {
+        let (recorder, sut) = makeSUT()
+        
+        sut.start()
+        sut.stop()
+        recorder.completeWith(flag: false)
+        
+        sut.onRecordCompletion = { flag in
+            XCTAssertFalse(flag)
+        }
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
@@ -105,6 +130,7 @@ class AVAudioRecorderSpy: Recorder {
     weak var delegate: AVAudioRecorderDelegate?
     
     private(set) var messages = [Message]()
+    private var didFinishWithSuccess: Bool?
     
     required init(url: URL = URL.any, settings: [String: Any] = [:]) throws {
         self.url = url
@@ -121,8 +147,16 @@ class AVAudioRecorderSpy: Recorder {
         return true
     }
     
+    func completeWith(flag success: Bool) {
+        didFinishWithSuccess = success
+    }
+    
     func stop() {
         messages.append(.stop)
+        
+        if let flag = didFinishWithSuccess {
+            delegate?.audioRecorderDidFinishRecording?(AVAudioRecorder(), successfully: flag)
+        }
     }
 }
 
