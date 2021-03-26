@@ -107,6 +107,8 @@ class AudioRecorderTests: XCTestCase {
         }
     }
     
+    // TODO: Mic Level and Timer
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
