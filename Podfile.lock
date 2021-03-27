@@ -1,0 +1,16 @@
+PODS:
+  - SwiftInfo (2.5.1)
+
+DEPENDENCIES:
+  - SwiftInfo
+
+SPEC REPOS:
+  trunk:
+    - SwiftInfo
+
+SPEC CHECKSUMS:
+  SwiftInfo: 1b627c06b160c1acee851c0f6e90a797127c4b1d
+
+PODFILE CHECKSUM: ab09264de5fae7cac2d3b54facabdcdc83ac9429
+
+COCOAPODS: 1.9.3
