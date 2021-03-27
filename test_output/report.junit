@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='AudioRecorderEndToEndTests.xctest' tests='1' failures='1'>
+  <testsuite name='AudioRecorderEndToEndTests.AudioRecorderEndToEndTests' tests='1' failures='1'>
+    <testcase classname='AudioRecorderEndToEndTests.AudioRecorderEndToEndTests' name='testExample'>
+      <failure message='failed - This test is not implemented'>
+        /Users/viniciusmoreiraleal/Documents/Other/iRecord/AudioRecorderEndToEndTests/AudioRecorderEndToEndTests.swift:14
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

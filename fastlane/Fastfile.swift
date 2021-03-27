@@ -9,13 +9,23 @@
 import Foundation
 
 class Fastfile: LaneFile {
-	func customLane() {
-	desc("Description of what the lane does")
-		// add actions here: https://docs.fastlane.tools/actions
+    
+    func buildAndTestLane() {
+        desc("Builds and runs tests")
         
-	}
+        scan(
+            scheme: .some("CI"),
+            device: "iPhone 12 Pro",
+            codeCoverage: true,
+            buildlogPath: "./build/tests_log",
+            derivedDataPath: "Build/",
+            sdk: "iphonesimulator",
+            xcargs: "ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO"
+        )
+    }
 }
 
+//xcodebuild clean build test -project Pokedex.xcodeproj -derivedDataPath Build/ -enableCodeCoverage=YES -scheme "CI" -sdk iphonesimulator -destination "platform=iOS Simulator,OS=14.2,name=iPhone 12 Pro" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
 
 /*
  default_platform :ios
@@ -33,25 +43,6 @@ class Fastfile: LaneFile {
  sh("mkdir -p ./build")
  sh("touch ./build/build_log")
  sh("xcodebuild -workspace ./SwiftInfoExample.xcworkspace -scheme SwiftInfoExample 2>&1 | tee ./build/build_log")
- 
- # Archive the app, copying the raw logs to the project folder
- #gym(
- #     workspace: "SwiftInfoExample.xcworkspace",
- #     scheme: "SwiftInfoExample",
- #     buildlog_path: "./build/build_log",
- #   output_directory: "build",
- #   # This is so you can run this with automatic provisioning
- #   xcargs: "-allowProvisioningUpdates",
- # )
- 
- # Uncomment me if copying this to a real project
- # Run SwiftInfo
- # sh("../Pods/SwiftInfo/swiftinfo")
- 
- # Commit and push SwiftInfo's result
- # sh("git add ../SwiftInfo-output/SwiftInfoOutput.json")
- # sh("git commit -m \"[ci skip] Updating SwiftInfo Output JSON\"")
- # push_to_git_remote
  end
  end
  */
