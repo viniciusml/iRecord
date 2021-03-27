@@ -23,13 +23,21 @@ class Fastfile: LaneFile {
             xcargs: "ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO"
         )
         
+        // Build the app without archiving, copying the raw logs to the project folder
+        sh(command: "mkdir -p ./build", errorCallback: logError)
+        sh(command: "touch ./build/build_log", errorCallback: logError)
+        
         // Run the CocoaPods version of SwiftInfo
-        sh(command: "../Pods/SwiftInfo/bin/swiftinfo")
+        sh(command: "../Pods/SwiftInfo/bin/swiftinfo", errorCallback: logError)
         
         // Commit and push SwiftInfo's output
-        sh(command: "git add ../SwiftInfo-output/SwiftInfoOutput.json")
-        sh(command: "git commit -m \"[ci skip] Updating SwiftInfo Output JSON\"")
+        sh(command: "git add ../SwiftInfo-output/SwiftInfoOutput.json", errorCallback: logError)
+        sh(command: "git commit -m \"[ci skip] Updating SwiftInfo Output JSON\"", errorCallback: logError)
         pushToGitRemote()
+    }
+    
+    func logError(_ error: String) {
+        echo(message: "🔴🟢 \(error) 🔴🟢")
     }
 }
 
