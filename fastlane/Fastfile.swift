@@ -22,6 +22,14 @@ class Fastfile: LaneFile {
             sdk: "iphonesimulator",
             xcargs: "ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO"
         )
+        
+        // Run the CocoaPods version of SwiftInfo
+        sh(command: "../Pods/SwiftInfo/bin/swiftinfo")
+        
+        // Commit and push SwiftInfo's output
+        sh(command: "git add ../SwiftInfo-output/SwiftInfoOutput.json")
+        sh(command: "git commit -m \"[ci skip] Updating SwiftInfo Output JSON\"")
+        pushToGitRemote()
     }
 }
 
