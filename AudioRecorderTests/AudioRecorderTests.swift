@@ -101,32 +101,18 @@ class AudioRecorderTests: XCTestCase {
     
     func test_stopWithSuccess_notifiesCallback() {
         let (recorder, sut) = makeSUT()
-        
-        sut.start()
-        sut.stop()
-        recorder.completeWith(flag: true)
-        
-        sut.onRecordCompletion = { flag in
-            XCTAssertTrue(flag)
-        }
+
+        expect(sut, toCompleteRecordingWith: true, when: {
+            recorder.completeWith(flag: true)
+        })
     }
     
     func test_stopWithFailure_notifiesCallback() {
         let (recorder, sut) = makeSUT()
-        let exp = expectation(description: "wait for record completion")
-        var expectedFlag: Bool?
-        
-        sut.start()
-        recorder.completeWith(flag: false)
-        
-        sut.onRecordCompletion = { flag in
-            expectedFlag = flag
-            exp.fulfill()
-        }
-        sut.stop()
-        
-        wait(for: [exp], timeout: 0.1)
-        XCTAssertEqual(expectedFlag, true)
+
+        expect(sut, toCompleteRecordingWith: false, when: {
+            recorder.completeWith(flag: false)
+        })
     }
     
     func test_handleLevels_completeWithTimeAndPower() {
@@ -155,6 +141,23 @@ class AudioRecorderTests: XCTestCase {
         trackForMemoryLeaks(recorder, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (recorder, sut)
+    }
+    
+    private func expect(_ sut: AudioRecorder, toCompleteRecordingWith flag: Bool, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "wait for record completion")
+        var expectedFlag: Bool?
+        
+        sut.start()
+        action()
+        
+        sut.onRecordCompletion = { flag in
+            expectedFlag = flag
+            exp.fulfill()
+        }
+        sut.stop()
+        
+        wait(for: [exp], timeout: 0.1)
+        XCTAssertEqual(expectedFlag, flag, file: file, line: line)
     }
 }
 
