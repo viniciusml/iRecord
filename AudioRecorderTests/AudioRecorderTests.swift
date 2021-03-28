@@ -67,7 +67,11 @@ class AudioRecorder: NSObject {
     }
 }
 
-extension AudioRecorder: AVAudioRecorderDelegate {}
+extension AudioRecorder: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        onRecordCompletion?(flag)
+    }
+}
 
 class AudioRecorderTests: XCTestCase {
     
@@ -109,14 +113,20 @@ class AudioRecorderTests: XCTestCase {
     
     func test_stopWithFailure_notifiesCallback() {
         let (recorder, sut) = makeSUT()
+        let exp = expectation(description: "wait for record completion")
+        var expectedFlag: Bool?
         
         sut.start()
-        sut.stop()
         recorder.completeWith(flag: false)
         
         sut.onRecordCompletion = { flag in
-            XCTAssertFalse(flag)
+            expectedFlag = flag
+            exp.fulfill()
         }
+        sut.stop()
+        
+        wait(for: [exp], timeout: 0.1)
+        XCTAssertEqual(expectedFlag, true)
     }
     
     func test_handleLevels_completeWithTimeAndPower() {
