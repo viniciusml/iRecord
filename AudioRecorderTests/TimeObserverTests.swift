@@ -15,16 +15,13 @@ protocol ScheduledTimer {
 extension Timer: ScheduledTimer {}
 
 class TimeObserver {
-    private let timeProvider: Timer.Type
     var observerCallback: () -> Void = {}
     private(set) var timer: Timer?
     
-    init(timeProvider: Timer.Type = Timer.self) {
-        self.timeProvider = timeProvider
-    }
+    init() {}
     
     func observe(timeInterval: TimeInterval = 0.02, shouldRepeat: Bool = true) {
-        timeProvider.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] timer in
+        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] timer in
             self?.timer = timer
             self?.observerCallback()
         })
@@ -81,8 +78,8 @@ class TimeObserverTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(provider: Timer.Type = Timer.self, file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
-        let sut = TimeObserver(timeProvider: provider)
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
+        let sut = TimeObserver()
         let counter = Counter()
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(counter, file: file, line: line)
@@ -107,20 +104,6 @@ class TimeObserverTests: XCTestCase {
         
         wait(for: allExp, timeout: 1.2)
         XCTAssertEqual(counter.count, count, file: file, line: line)
-    }
-    
-    private class TimerSpy: Timer {
-        
-        override open class func scheduledTimer(
-            withTimeInterval interval: TimeInterval,
-            repeats: Bool,
-            block: @escaping (Timer) -> Void) -> Timer {
-            
-            let timerSpy = TimerSpy()
-            block(timerSpy)
-            
-            return timerSpy
-        }
     }
     
     private class Counter {
