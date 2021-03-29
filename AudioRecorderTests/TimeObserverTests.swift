@@ -17,15 +17,21 @@ extension Timer: ScheduledTimer {}
 class TimeObserver {
     private let timeProvider: Timer.Type
     var observerCallback: () -> Void = {}
+    private(set) var timer: Timer?
     
     init(timeProvider: Timer.Type = Timer.self) {
         self.timeProvider = timeProvider
     }
     
     func observe(timeInterval: TimeInterval = 0.02, shouldRepeat: Bool = true) {
-        timeProvider.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] _ in
+        timeProvider.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] timer in
+            self?.timer = timer
             self?.observerCallback()
         })
+    }
+    
+    func stopObserving() {
+        timer?.invalidate()
     }
 }
 
@@ -59,10 +65,24 @@ class TimeObserverTests: XCTestCase {
                expectations: expectations)
     }
     
+    func test_stopObserving_invalidatesTimer() {
+        let (sut, _) = makeSUT()
+        let expectation = exp(1)
+        
+        sut.observe(timeInterval: 1.0)
+        sut.observerCallback = {
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.2)
+        sut.stopObserving()
+        XCTAssertEqual(sut.timer?.isValid, false)
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
-        let sut = TimeObserver()
+    private func makeSUT(provider: Timer.Type = Timer.self, file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
+        let sut = TimeObserver(timeProvider: provider)
         let counter = Counter()
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(counter, file: file, line: line)
@@ -91,25 +111,15 @@ class TimeObserverTests: XCTestCase {
     
     private class TimerSpy: Timer {
         
-        var block: ((Timer) -> Void)!
-        
-        static var currentTimer: TimerSpy!
-        
-        override func fire() {
-            block(self)
-        }
-        
         override open class func scheduledTimer(
             withTimeInterval interval: TimeInterval,
             repeats: Bool,
             block: @escaping (Timer) -> Void) -> Timer {
             
-            let mockTimer = TimerSpy()
-            mockTimer.block = block
+            let timerSpy = TimerSpy()
+            block(timerSpy)
             
-            TimerSpy.currentTimer = mockTimer
-            
-            return mockTimer
+            return timerSpy
         }
     }
     
