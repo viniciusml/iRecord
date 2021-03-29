@@ -8,12 +8,6 @@
 
 import XCTest
 
-protocol ScheduledTimer {
-    static func scheduledTimer(timeInterval ti: TimeInterval, target aTarget: Any, selector aSelector: Selector, userInfo: Any?, repeats yesOrNo: Bool) -> Timer
-}
-
-extension Timer: ScheduledTimer {}
-
 class TimeObserver {
     var observerCallback: (() -> Void)?
     private(set) var timer: Timer?
