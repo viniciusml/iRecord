@@ -15,7 +15,7 @@ protocol ScheduledTimer {
 extension Timer: ScheduledTimer {}
 
 class TimeObserver {
-    var observerCallback: () -> Void = {}
+    var observerCallback: (() -> Void)?
     private(set) var timer: Timer?
     
     init() {}
@@ -23,7 +23,7 @@ class TimeObserver {
     func observe(timeInterval: TimeInterval = 0.02, shouldRepeat: Bool = true) {
         Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] timer in
             self?.timer = timer
-            self?.observerCallback()
+            self?.observerCallback?()
         })
     }
     
