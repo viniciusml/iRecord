@@ -23,8 +23,8 @@ class TimeObserver {
     }
     
     func observe(timeInterval: TimeInterval = 0.02, shouldRepeat: Bool = true) {
-        timeProvider.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { _ in
-            self.observerCallback()
+        timeProvider.scheduledTimer(withTimeInterval: timeInterval, repeats: shouldRepeat, block: { [weak self] _ in
+            self?.observerCallback()
         })
     }
 }
@@ -32,15 +32,13 @@ class TimeObserver {
 class TimeObserverTests: XCTestCase {
     
     func test_init_doesNotObserve() {
-        let counter = Counter()
-        _ = TimeObserver()
+        let (_, counter) = makeSUT()
         
         XCTAssertEqual(counter.count, 0)
     }
     
     func test_observeOnce_startsObserving() {
-        let counter = Counter()
-        let sut = TimeObserver()
+        let (sut, counter) = makeSUT()
         let exp = expectation(description: "wait for timer to fire")
         
         sut.observerCallback = {
@@ -54,8 +52,8 @@ class TimeObserverTests: XCTestCase {
     }
     
     func test_observeMultipleTimes_startsObserving() {
-        let counter = Counter()
-        let sut = TimeObserver()
+        let (sut, counter) = makeSUT()
+        
         let exp1 = expectation(description: "wait for timer1 to fire")
         let exp2 = expectation(description: "wait for timer2 to fire")
         let exp3 = expectation(description: "wait for timer3 to fire")
@@ -77,6 +75,14 @@ class TimeObserverTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
+        let sut = TimeObserver()
+        let counter = Counter()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(counter, file: file, line: line)
+        return (sut, counter)
+    }
     
     private class TimerSpy: Timer {
         
