@@ -39,26 +39,41 @@ class TimeObserverTests: XCTestCase {
     
     func test_observeOnce_startsObserving() {
         let (sut, counter) = makeSUT()
-        let exp = expectation(description: "wait for timer to fire")
+        let expectations = [exp(1)]
         
-        sut.observerCallback = {
-            exp.fulfill()
-            counter.increaseCount()
-        }
-        sut.observe(timeInterval: 1.0)
-        
-        wait(for: [exp], timeout: 1.2)
-        XCTAssertEqual(counter.count, 1)
+        expect(sut: sut,
+               toObserveCount: 1,
+               inCounter: counter,
+               forSecondInterval: 1.0,
+               expectations: expectations)
     }
     
     func test_observeMultipleTimes_startsObserving() {
         let (sut, counter) = makeSUT()
+        let expectations = [exp(1), exp(2), exp(3), exp(4)]
         
-        let exp1 = expectation(description: "wait for timer1 to fire")
-        let exp2 = expectation(description: "wait for timer2 to fire")
-        let exp3 = expectation(description: "wait for timer3 to fire")
-        let exp4 = expectation(description: "wait for timer4 to fire")
-        let allExp = [exp1, exp2, exp3, exp4]
+        expect(sut: sut,
+               toObserveCount: 4,
+               inCounter: counter,
+               forSecondInterval: 0.25,
+               expectations: expectations)
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
+        let sut = TimeObserver()
+        let counter = Counter()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(counter, file: file, line: line)
+        return (sut, counter)
+    }
+    
+    private func exp(_ id: Int) -> XCTestExpectation {
+        expectation(description: "wait for timer to fire, count: \(id)")
+    }
+    
+    private func expect(sut: TimeObserver, toObserveCount count: Int, inCounter counter: Counter, forSecondInterval timeInterval: TimeInterval, expectations allExp: [XCTestExpectation], file: StaticString = #filePath, line: UInt = #line) {
         var expectations = allExp
         
         sut.observerCallback = {
@@ -71,17 +86,7 @@ class TimeObserverTests: XCTestCase {
         sut.observe(timeInterval: 0.25)
         
         wait(for: allExp, timeout: 1.2)
-        XCTAssertEqual(counter.count, 4)
-    }
-    
-    // MARK: - Helpers
-    
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: TimeObserver, counter: Counter) {
-        let sut = TimeObserver()
-        let counter = Counter()
-        trackForMemoryLeaks(sut, file: file, line: line)
-        trackForMemoryLeaks(counter, file: file, line: line)
-        return (sut, counter)
+        XCTAssertEqual(counter.count, count, file: file, line: line)
     }
     
     private class TimerSpy: Timer {
