@@ -38,7 +38,7 @@ class TimeObserverTests: XCTestCase {
         XCTAssertEqual(counter.count, 0)
     }
     
-    func test_observe_startsObserving() {
+    func test_observeOnce_startsObserving() {
         let counter = Counter()
         let sut = TimeObserver()
         let exp = expectation(description: "wait for timer to fire")
@@ -49,8 +49,31 @@ class TimeObserverTests: XCTestCase {
         }
         sut.observe(timeInterval: 1.0)
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 1.2)
         XCTAssertEqual(counter.count, 1)
+    }
+    
+    func test_observeMultipleTimes_startsObserving() {
+        let counter = Counter()
+        let sut = TimeObserver()
+        let exp1 = expectation(description: "wait for timer1 to fire")
+        let exp2 = expectation(description: "wait for timer2 to fire")
+        let exp3 = expectation(description: "wait for timer3 to fire")
+        let exp4 = expectation(description: "wait for timer4 to fire")
+        let allExp = [exp1, exp2, exp3, exp4]
+        var expectations = allExp
+        
+        sut.observerCallback = {
+            expectations.first?.fulfill()
+            if expectations.count > 1 {
+                expectations.removeFirst()
+            }
+            counter.increaseCount()
+        }
+        sut.observe(timeInterval: 0.25)
+        
+        wait(for: allExp, timeout: 1.2)
+        XCTAssertEqual(counter.count, 4)
     }
     
     // MARK: - Helpers
