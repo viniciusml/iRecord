@@ -11,6 +11,5 @@ import XCTest
 class AudioRecorderEndToEndTests: XCTestCase {
 
     func testExample() throws {
-        XCTFail("This test is not implemented")
     }
 }

@@ -104,7 +104,6 @@
 				85A7C1D51420EF9440E17031 /* Pods-AudioRecorderEndToEndTests.debug.xcconfig */,
 				6E43D2F4E5B2A36343C605ED /* Pods-AudioRecorderEndToEndTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
