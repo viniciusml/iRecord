@@ -10,12 +10,12 @@ let projectInfo = ProjectInfo(xcodeproj: "AudioRecorder.xcodeproj",
 
 let api = SwiftInfo(projectInfo: projectInfo)
 
-let output = api.extract(TotalTestDurationProvider.self)      +
-             api.extract(TestCountProvider.self)              +
-             api.extract(CodeCoverageProvider.self)           +
-             api.extract(LongestTestDurationProvider.self)
+let output = api.extract(WarningCountProvider.self) +
+             api.extract(TestCountProvider.self) +
+             api.extract(TargetCountProvider.self, args: .init(mode: .complainOnRemovals)) +
+             api.extract(CodeCoverageProvider.self, args: .init(targets: ["AudioRecorder"])) +
+             api.extract(LinesOfCodeProvider.self, args: .init(targets: ["AudioRecorder"]))
 
-//api.sendToSlack(output: output, webhookUrl: "slackUrlHere")
 api.print(output: output)
 
 api.save(output: output)
