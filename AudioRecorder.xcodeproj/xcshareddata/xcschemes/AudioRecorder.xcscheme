@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8A9F0B226094C3100FD8969"
+               BlueprintIdentifier = "D80F3E82260951640086BEBA"
                BuildableName = "AudioRecorderTests.xctest"
                BlueprintName = "AudioRecorderTests"
                ReferencedContainer = "container:AudioRecorder.xcodeproj">
