@@ -1,0 +1,52 @@
+{
+  "data" : [
+    {
+      "test_count" : {
+        "data" : {
+          "count" : 9,
+          "description" : "🎯 Test Count"
+        },
+        "summary" : {
+          "color" : "#757575",
+          "stringValue" : "9",
+          "numericValue" : 9,
+          "text" : "🎯 Test Count: 9"
+        }
+      },
+      "code_coverage" : {
+        "data" : {
+          "percentageInt" : 127,
+          "description" : "📊 Code Coverage"
+        },
+        "summary" : {
+          "color" : "#757575",
+          "stringValue" : "12.7%",
+          "numericValue" : 12.699999809265137,
+          "text" : "📊 Code Coverage: 12.7%"
+        }
+      },
+      "longest_test_duration" : {
+        "summary" : {
+          "color" : "#757575",
+          "stringValue" : "0.001 (-[AudioRecorderTests.AudioRecorderTests test_init_setsDelegate])",
+          "numericValue" : 0.0010000000474974513,
+          "text" : "⏰ Longest Test: -[AudioRecorderTests.AudioRecorderTests test_init_setsDelegate] (0.001 secs)"
+        },
+        "data" : {
+          "name" : "-[AudioRecorderTests.AudioRecorderTests test_init_setsDelegate]",
+          "durationInt" : 1,
+          "description" : "⏰ Longest Test"
+        }
+      },
+      "swiftinfo_run_project_info" : {
+        "configuration" : "Release",
+        "versionString" : "1.0",
+        "description" : "AudioRecorder 1.0 (1) - Release",
+        "xcodeproj" : "AudioRecorder.xcodeproj",
+        "timestamp" : 1619552797.6661038,
+        "target" : "AudioRecorder",
+        "buildNumber" : "1"
+      }
+    }
+  ]
+}
