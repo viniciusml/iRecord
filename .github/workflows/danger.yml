@@ -12,8 +12,7 @@ jobs:
     steps:
       - uses: MeilCli/danger-action@v5
         with:
-            plugins_file: 'Gemfile'
-            install_path: 'vendor/bundle'
+            plugins_file: './Gemfile'
             danger_file: 'danger/Dangerfile'
             danger_id: 'danger-pr'
         env:
