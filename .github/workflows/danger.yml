@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     name: "Run Danger"
     steps:
+      - uses: MeilCli/danger-action@v5
+        with:
+            plugins_file: 'Gemfile'
+            install_path: 'vendor/bundle'
+            danger_file: 'danger/Dangerfile'
+            danger_id: 'danger-pr'
       - uses: actions/checkout@v1
       - name: Danger
         uses: danger/danger
