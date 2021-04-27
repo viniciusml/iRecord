@@ -1,23 +1,24 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
-default_platform(:ios)
+default_platform :ios
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "Test"
+  lane :info do
+    # Run Tests, copying the raw logs to the project folder 
+    scan(
+    	scheme: "CI",
+    	buildlog_path: "./build/tests_log"
+    )
+
+    # Build the app without archiving, copying the raw logs to the project folder 
+    sh("mkdir -p ./build")
+    sh("touch ./build/build_log")
+    sh("xcodebuild -project ../AudioRecorder.xcodeproj -scheme CI -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=14.2,name=iPhone 12 Pro' ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO 2>&1 | tee ./build/build_log")
+
+    # Run SwiftInfo
+    sh("../swiftinfo/bin/swiftinfo ")
+
+    # Commit and push SwiftInfo's result
+    sh("git add ../SwiftInfo-output/SwiftInfoOutput.json")
+    sh("git commit -m \"[ci skip] Updating SwiftInfo Output JSON\"")
   end
 end
