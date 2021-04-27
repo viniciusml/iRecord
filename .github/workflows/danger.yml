@@ -11,9 +11,9 @@ jobs:
     if: github.event_name  == 'pull_request'
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '2.7.0p0'
+        ruby-version: '2.7'
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
