@@ -1,6 +1,6 @@
-version: "Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)"
-options: "6332e9943f6ba322245f8c3a5022433a"
-build_time: [1606811962, 165536000]
+version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+options: "270ae1edd507b4657dfd6f7d22ef1442"
+build_time: [1612631220, 871128000]
 inputs:
   "/Users/rochab/Desktop/Other/SwiftInfo/Sources/SwiftInfoCore/BuildSystem.swift": [9223372036, 854775807]
   "/Users/rochab/Desktop/Other/SwiftInfo/Sources/SwiftInfoCore/ExtractedInfo.swift": [9223372036, 854775807]

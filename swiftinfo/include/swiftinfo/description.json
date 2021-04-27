@@ -11,6 +11,7 @@
   },
   "swiftTargetMap" : {
     "C.AEXML-release.module" : "AEXML",
+    "C.ArgumentParser-release.module" : "ArgumentParser",
     "C.PathKit-release.module" : "PathKit",
     "C.Spectre-release.module" : "Spectre",
     "C.SwiftInfo-release.module" : "SwiftInfo",

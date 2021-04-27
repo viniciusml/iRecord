@@ -3,6 +3,41 @@
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/AEXML.build/Error.swift.o
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/AEXML.build/Options.swift.o
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/AEXML.build/Parser.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/BashCompletionsGenerator.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/CompletionsGenerator.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/FishCompletionsGenerator.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Completions/ZshCompletionsGenerator.swift.o
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Argument.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/ArgumentHelp.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/CompletionKind.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Errors.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Flag.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/NameSpecification.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/Option.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Properties/OptionGroup.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/CommandConfiguration.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/EnumerableFlag.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ExpressibleByArgument.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArguments.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableArgumentsValidation.swift.o'
+'/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsable Types/ParsableCommand.swift.o'
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDecoder.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentDefinition.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ArgumentSet.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/CommandParser.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/InputOrigin.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Name.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/Parsed.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParsedValues.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/ParserError.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Parsing/SplitArguments.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpCommand.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/HelpGenerator.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/MessageInfo.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Usage/UsageGenerator.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/SequenceExtensions.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/StringExtensions.swift.o
+/Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/ArgumentParser.build/Utilities/Tree.swift.o
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/Csourcekitd.build/sourcekitd.c.o
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/PathKit.build/PathKit.swift.o
 /Users/rochab/Desktop/Other/SwiftInfo/.build/x86_64-apple-macosx/release/SwiftInfo.build/main.swift.o
