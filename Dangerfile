@@ -1,5 +1,5 @@
 
-swiftinfo.run '../swiftinfo/bin/swiftinfo'
+swiftinfo.run './swiftinfo/bin/swiftinfo'
 
 #### HELPER METHODS
 def lineContainsPublicPropertyMethodClassOrStruct(line)
