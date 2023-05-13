@@ -9,7 +9,7 @@
 import AVFoundation
 import XCTest
 
-protocol Recorder: AnyObject {
+protocol Recording: AnyObject {
     var isMeteringEnabled: Bool { get set }
     var delegate: AVAudioRecorderDelegate? { get set }
     var currentTime: TimeInterval { get }
@@ -21,7 +21,7 @@ protocol Recorder: AnyObject {
     func averagePower(forChannel channelNumber: Int) -> Float
 }
 
-extension AVAudioRecorder: Recorder {}
+extension AVAudioRecorder: Recording {}
 
 struct AudioRecorderFactory {
     private static let settings = [
@@ -31,17 +31,17 @@ struct AudioRecorderFactory {
         AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
     ]
     
-    static func make(with url: URL, settings: [String: Any] = settings) throws -> Recorder {
+    static func make(with url: URL, settings: [String: Any] = settings) throws -> Recording {
         try AVAudioRecorder(url: url, settings: settings)
     }
 }
 
 final class AudioRecorder: NSObject {
-    private let recorder: Recorder
+    private let recorder: Recording
     var onRecordCompletion: ((Bool) -> Void)?
     var onLevelsUpdate: ((TimeInterval, Float) -> Void)?
     
-    init(recorder: Recorder) {
+    init(recorder: Recording) {
         self.recorder = recorder
         super.init()
         
@@ -161,7 +161,7 @@ final class AudioRecorderTests: XCTestCase {
     }
 }
 
-class AVAudioRecorderSpy: Recorder {
+final class AVAudioRecorderSpy: Recording {
     enum Message {
         case record, prepareToRecord, stop
     }
