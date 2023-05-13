@@ -76,13 +76,13 @@ extension AudioRecorder: AVAudioRecorderDelegate {
 final class AudioRecorderTests: XCTestCase {
     
     func test_init_setsDelegate() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
         XCTAssertTrue(recorder.delegate === sut)
     }
     
     func test_start_beginsRecording() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
         sut.start()
         
@@ -91,7 +91,7 @@ final class AudioRecorderTests: XCTestCase {
     }
     
     func test_stop_finishesRecording() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
         sut.start()
         sut.stop()
@@ -99,24 +99,24 @@ final class AudioRecorderTests: XCTestCase {
         XCTAssertEqual(recorder.messages, [.record, .prepareToRecord, .stop])
     }
     
-    func test_stopWithSuccess_notifiesCallback() {
-        let (recorder, sut) = makeSUT()
+    func test_stopWithSuccess_notifiesCallback() throws {
+        let (recorder, sut) = try makeSUT()
 
         expect(sut, toCompleteRecordingWith: true, when: {
             recorder.completeWith(flag: true)
         })
     }
     
-    func test_stopWithFailure_notifiesCallback() {
-        let (recorder, sut) = makeSUT()
+    func test_stopWithFailure_notifiesCallback() throws {
+        let (recorder, sut) = try makeSUT()
 
         expect(sut, toCompleteRecordingWith: false, when: {
             recorder.completeWith(flag: false)
         })
     }
     
-    func test_handleLevels_completeWithTimeAndPower() {
-        let (recorder, sut) = makeSUT()
+    func test_handleLevels_completeWithTimeAndPower() throws {
+        let (recorder, sut) = try makeSUT()
         let exp = expectation(description: "wait for level update")
         var expectedIntervalAndPower: (TimeInterval, Float)?
         
@@ -135,8 +135,8 @@ final class AudioRecorderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
-        let recorder = try! AVAudioRecorderSpy()
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) throws -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
+        let recorder = try AVAudioRecorderSpy()
         let sut = AudioRecorder(recorder: recorder)
         trackForMemoryLeaks(recorder, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
