@@ -94,7 +94,7 @@ class TimeObserverTests: XCTestCase {
             }
             counter.increaseCount()
         }
-        sut.observe(timeInterval: 0.25)
+        sut.observe(timeInterval: timeInterval)
         
         wait(for: allExp, timeout: 1.2)
         XCTAssertEqual(counter.count, count, file: file, line: line)
