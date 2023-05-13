@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol MicrophoneDelegate: class {
+protocol MicrophoneDelegate: AnyObject {
     func updateTimerLabel()
 }
