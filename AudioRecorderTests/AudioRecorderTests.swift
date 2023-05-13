@@ -118,7 +118,7 @@ final class AudioRecorderTests: XCTestCase {
     func test_handleLevels_completeWithTimeAndPower() throws {
         let (recorder, sut) = try makeSUT()
         let exp = expectation(description: "wait for level update")
-        var expectedIntervalAndPower: (TimeInterval, Float)?
+        var expectedIntervalAndPower: (interval: TimeInterval, level: Float)?
         
         recorder.completeWith(5.0, level: 10)
         
@@ -129,8 +129,8 @@ final class AudioRecorderTests: XCTestCase {
         sut.handleLevels()
         
         wait(for: [exp], timeout: 0.1)
-        XCTAssertEqual(expectedIntervalAndPower?.0, 5.0)
-        XCTAssertEqual(expectedIntervalAndPower?.1, 10)
+        XCTAssertEqual(expectedIntervalAndPower?.interval, 5.0)
+        XCTAssertEqual(expectedIntervalAndPower?.level, 10)
     }
     
     // MARK: - Helpers
@@ -169,13 +169,13 @@ final class AVAudioRecorderSpy: Recording {
     private let url: URL
     private let settings: [String : Any]
     var isMeteringEnabled: Bool = false
-    var currentTime: TimeInterval { timeIntervalAndLevel?.0 ?? 3.0 }
+    var currentTime: TimeInterval { timeIntervalAndLevel?.interval ?? 3.0 }
     
     weak var delegate: AVAudioRecorderDelegate?
     
     private(set) var messages = [Message]()
     private var didFinishWithSuccess: Bool?
-    private(set) var timeIntervalAndLevel: (TimeInterval, Float)?
+    private(set) var timeIntervalAndLevel: (interval: TimeInterval, level: Float)?
     
     required init(url: URL = URL.any, settings: [String: Any] = [:]) throws {
         self.url = url
@@ -209,7 +209,7 @@ final class AVAudioRecorderSpy: Recording {
     }
     
     func averagePower(forChannel channelNumber: Int) -> Float {
-        timeIntervalAndLevel?.1 ?? 3.0
+        timeIntervalAndLevel?.level ?? 3.0
     }
     
     func updateMeters() {}
