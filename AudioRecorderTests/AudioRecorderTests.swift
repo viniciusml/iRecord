@@ -36,7 +36,7 @@ struct AudioRecorderFactory {
     }
 }
 
-class AudioRecorder: NSObject {
+final class AudioRecorder: NSObject {
     private let recorder: Recorder
     var onRecordCompletion: ((Bool) -> Void)?
     var onLevelsUpdate: ((TimeInterval, Float) -> Void)?
@@ -73,7 +73,7 @@ extension AudioRecorder: AVAudioRecorderDelegate {
     }
 }
 
-class AudioRecorderTests: XCTestCase {
+final class AudioRecorderTests: XCTestCase {
     
     func test_init_setsDelegate() throws {
         let (recorder, sut) = makeSUT()

@@ -8,7 +8,7 @@
 
 import XCTest
 
-class TimeObserver {
+final class TimeObserver {
     var observerCallback: (() -> Void)?
     private(set) var timer: Timer?
     
@@ -26,7 +26,7 @@ class TimeObserver {
     }
 }
 
-class TimeObserverTests: XCTestCase {
+final class TimeObserverTests: XCTestCase {
     
     func test_init_doesNotObserve() {
         let (_, counter) = makeSUT()
