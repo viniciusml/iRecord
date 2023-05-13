@@ -78,7 +78,7 @@ final class AudioRecorderTests: XCTestCase {
     func test_init_setsDelegate() throws {
         let (recorder, sut) = try makeSUT()
         
-        XCTAssertTrue(recorder.delegate === sut)
+        XCTAssertIdentical(recorder.delegate, sut)
     }
     
     func test_start_beginsRecording() throws {
