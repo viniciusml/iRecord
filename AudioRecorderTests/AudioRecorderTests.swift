@@ -9,7 +9,7 @@
 import AVFoundation
 import XCTest
 
-protocol Recorder: class {
+protocol Recorder: AnyObject {
     var isMeteringEnabled: Bool { get set }
     var delegate: AVAudioRecorderDelegate? { get set }
     var currentTime: TimeInterval { get }
