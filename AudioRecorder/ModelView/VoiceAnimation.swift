@@ -49,12 +49,7 @@ class VoiceAnimation: NSObject {
         dot.borderColor = UIColor.clear.cgColor
 
         replicator.removeAllAnimations()
-        let scale = CABasicAnimation(keyPath: "transform")
-        scale.toValue = NSValue(caTransform3D: CATransform3DIdentity)
-        scale.duration = 0.33
-        scale.isRemovedOnCompletion = false
-        scale.fillMode = CAMediaTimingFillMode.forwards
-        dot.add(scale, forKey: nil)
+        dot.add(.transform, forKey: nil)
     }
 
     func animateWithVoice(lastTransformScale: CGFloat, scaleFactor: CGFloat) {
@@ -79,4 +74,16 @@ class VoiceAnimation: NSObject {
         scale.fillMode = CAMediaTimingFillMode.forwards
         dot.add(scale, forKey: nil)
     }
+}
+
+public extension CAAnimation {
+    
+    static var transform: CAAnimation = {
+        let animation = CABasicAnimation(keyPath: "transform")
+        animation.toValue = NSValue(caTransform3D: CATransform3DIdentity)
+        animation.duration = 0.33
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = CAMediaTimingFillMode.forwards
+        return animation
+    }()
 }

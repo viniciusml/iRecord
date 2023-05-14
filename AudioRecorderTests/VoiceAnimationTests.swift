@@ -33,6 +33,17 @@ final class VoiceAnimationTests: XCTestCase {
         XCTAssertEqual(sut.dot.borderWidth, 0.5)
         XCTAssertEqual(sut.dot.cornerRadius, 0.5)
     }
+    
+    func test_endSpeaking_removesAllAnimations() {
+        let dot = CALayerSpy()
+        let sut = VoiceAnimation(dot: dot)
+        
+        sut.endSpeaking()
+        
+        XCTAssertEqual(dot.backgroundColor, UIColor.clear.cgColor)
+        XCTAssertEqual(dot.borderColor, UIColor.clear.cgColor)
+        XCTAssertEqual(dot.log, [.addForKey(.transform, nil)])
+    }
 }
 
 private extension VoiceAnimationTests {
@@ -50,13 +61,18 @@ private extension VoiceAnimationTests {
         
         enum MethodCall: Equatable {
             case addSublayer(CALayer)
+            case addForKey(CAAnimation, String?)
         }
         
         private(set) var log = [MethodCall]()
         
         override func addSublayer(_ layer: CALayer) {
             log.append(.addSublayer(layer))
-            super.addSublayer(layer)
+            super.addSublayer(layer) // TODO: Remove this
+        }
+        
+        override func add(_ anim: CAAnimation, forKey key: String?) {
+            log.append(.addForKey(anim, key))
         }
     }
     
