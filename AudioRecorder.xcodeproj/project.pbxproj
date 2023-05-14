@@ -31,6 +31,7 @@
 		D8264B56261121C500094145 /* TimeObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8264B55261121C500094145 /* TimeObserverTests.swift */; };
 		D8A9F0922609436F00FD8969 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A9F0892609436F00FD8969 /* Engine.framework */; };
 		D8EFB9F8260A88F200D73F81 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EFB9F7260A88F200D73F81 /* AudioRecorderTests.swift */; };
+		ECFAA0572A10E4B8001D0084 /* VoiceAnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFAA0562A10E4B8001D0084 /* VoiceAnimationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		D8A9F0912609436F00FD8969 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A9F0982609436F00FD8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8EFB9F7260A88F200D73F81 /* AudioRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
+		ECFAA0562A10E4B8001D0084 /* VoiceAnimationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceAnimationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				D80F3E87260951650086BEBA /* Info.plist */,
 				D8EFB9F7260A88F200D73F81 /* AudioRecorderTests.swift */,
 				D8264B55261121C500094145 /* TimeObserverTests.swift */,
+				ECFAA0562A10E4B8001D0084 /* VoiceAnimationTests.swift */,
 			);
 			path = AudioRecorderTests;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D80F3E86260951640086BEBA /* AudioSessionTests.swift in Sources */,
+				ECFAA0572A10E4B8001D0084 /* VoiceAnimationTests.swift in Sources */,
 				D8EFB9F8260A88F200D73F81 /* AudioRecorderTests.swift in Sources */,
 				D8264B56261121C500094145 /* TimeObserverTests.swift in Sources */,
 			);

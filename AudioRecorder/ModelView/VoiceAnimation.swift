@@ -9,10 +9,18 @@
 import UIKit
 
 class VoiceAnimation: NSObject {
+    typealias CATransform3DTranslationFactory = (_ tx: CGFloat, _ ty: CGFloat, _ tz: CGFloat) -> CATransform3D
+    
     let replicator = CAReplicatorLayer()
     let dot = CALayer()
     let dotLength: CGFloat = 3.0
     let dotOffset: CGFloat = 11.0
+    private let makeTranslation: CATransform3DTranslationFactory
+    
+    init(makeTranslation: @escaping CATransform3DTranslationFactory = CATransform3DMakeTranslation) {
+        self.makeTranslation = makeTranslation
+        super.init()
+    }
 
     func setupAudioAnimation(view: UIView) {
         view.layer.addSublayer(replicator)
@@ -20,7 +28,7 @@ class VoiceAnimation: NSObject {
 
         replicator.frame = CGRect(x: view.bounds.minY - 5, y: view.bounds.minY + 90, width: view.bounds.width, height: 100)
         replicator.instanceCount = Int(view.frame.size.width / dotOffset)
-        replicator.instanceTransform = CATransform3DMakeTranslation(-dotOffset, 0.0, 0.0)
+        replicator.instanceTransform = makeTranslation(-dotOffset, 0.0, 0.0)
         replicator.instanceDelay = 0.04
 
         dot.frame = CGRect(
