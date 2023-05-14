@@ -44,6 +44,23 @@ final class VoiceAnimationTests: XCTestCase {
         XCTAssertEqual(dot.borderColor, UIColor.clear.cgColor)
         XCTAssertEqual(dot.log, [.addForKey(.transform, nil)])
     }
+    
+    func test_animateWithVoice_addsAnimations() {
+        let dot = CALayerSpy()
+        let lastTransformScale = 3.0
+        let scaleFactor = 1.0
+        let sut = VoiceAnimation(dot: dot)
+        
+        sut.animateWithVoice(lastTransformScale: lastTransformScale, scaleFactor: scaleFactor)
+        
+        XCTAssertEqual(dot.backgroundColor, UIColor.white.cgColor)
+        XCTAssertEqual(dot.borderColor, UIColor(white: 1.0, alpha: 0.3).cgColor)
+
+        XCTAssertEqual(dot.log, [
+            .addForKey(.fade, "dotOpacity"),
+            .addWithScale(.scale, lastTransformScale, scaleFactor)
+        ])
+    }
 }
 
 private extension VoiceAnimationTests {
@@ -57,11 +74,12 @@ private extension VoiceAnimationTests {
         }
     }
     
-    final class CALayerSpy: CALayer {
+    final class CALayerSpy: CALayer, ScalableCALayerProtocol {
         
         enum MethodCall: Equatable {
             case addSublayer(CALayer)
             case addForKey(CAAnimation, String?)
+            case addWithScale(CABasicAnimation, CGFloat, CGFloat)
         }
         
         private(set) var log = [MethodCall]()
@@ -73,6 +91,10 @@ private extension VoiceAnimationTests {
         
         override func add(_ anim: CAAnimation, forKey key: String?) {
             log.append(.addForKey(anim, key))
+        }
+        
+        func add(_ anim: CABasicAnimation, with lastTransformScale: CGFloat, scaleFactor: CGFloat) {
+            log.append(.addWithScale(anim, lastTransformScale, scaleFactor))
         }
     }
     
