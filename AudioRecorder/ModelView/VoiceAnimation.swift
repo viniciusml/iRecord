@@ -12,13 +12,14 @@ class VoiceAnimation: NSObject {
     typealias CATransform3DTranslationFactory = (_ tx: CGFloat, _ ty: CGFloat, _ tz: CGFloat) -> CATransform3D
     
     let replicator = CAReplicatorLayer()
-    let dot = CALayer()
+    let dot: CALayer
     let dotLength: CGFloat = 3.0
     let dotOffset: CGFloat = 11.0
     private let makeTranslation: CATransform3DTranslationFactory
     
-    init(makeTranslation: @escaping CATransform3DTranslationFactory = CATransform3DMakeTranslation) {
+    init(makeTranslation: @escaping CATransform3DTranslationFactory = CATransform3DMakeTranslation, dot: CALayer = CALayer()) {
         self.makeTranslation = makeTranslation
+        self.dot = dot
         super.init()
     }
 
