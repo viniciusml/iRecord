@@ -9,7 +9,7 @@
 import AVFoundation
 import XCTest
 
-protocol Recorder: class {
+protocol Recording: AnyObject {
     var isMeteringEnabled: Bool { get set }
     var delegate: AVAudioRecorderDelegate? { get set }
     var currentTime: TimeInterval { get }
@@ -21,7 +21,7 @@ protocol Recorder: class {
     func averagePower(forChannel channelNumber: Int) -> Float
 }
 
-extension AVAudioRecorder: Recorder {}
+extension AVAudioRecorder: Recording {}
 
 struct AudioRecorderFactory {
     private static let settings = [
@@ -31,17 +31,17 @@ struct AudioRecorderFactory {
         AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
     ]
     
-    static func make(with url: URL, settings: [String: Any] = settings) throws -> Recorder {
+    static func make(with url: URL, settings: [String: Any] = settings) throws -> Recording {
         try AVAudioRecorder(url: url, settings: settings)
     }
 }
 
-class AudioRecorder: NSObject {
-    private let recorder: Recorder
+final class AudioRecorder: NSObject {
+    private let recorder: Recording
     var onRecordCompletion: ((Bool) -> Void)?
     var onLevelsUpdate: ((TimeInterval, Float) -> Void)?
     
-    init(recorder: Recorder) {
+    init(recorder: Recording) {
         self.recorder = recorder
         super.init()
         
@@ -73,16 +73,16 @@ extension AudioRecorder: AVAudioRecorderDelegate {
     }
 }
 
-class AudioRecorderTests: XCTestCase {
+final class AudioRecorderTests: XCTestCase {
     
     func test_init_setsDelegate() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
-        XCTAssertTrue(recorder.delegate === sut)
+        XCTAssertIdentical(recorder.delegate, sut)
     }
     
     func test_start_beginsRecording() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
         sut.start()
         
@@ -91,7 +91,7 @@ class AudioRecorderTests: XCTestCase {
     }
     
     func test_stop_finishesRecording() throws {
-        let (recorder, sut) = makeSUT()
+        let (recorder, sut) = try makeSUT()
         
         sut.start()
         sut.stop()
@@ -99,26 +99,26 @@ class AudioRecorderTests: XCTestCase {
         XCTAssertEqual(recorder.messages, [.record, .prepareToRecord, .stop])
     }
     
-    func test_stopWithSuccess_notifiesCallback() {
-        let (recorder, sut) = makeSUT()
+    func test_stopWithSuccess_notifiesCallback() throws {
+        let (recorder, sut) = try makeSUT()
 
         expect(sut, toCompleteRecordingWith: true, when: {
             recorder.completeWith(flag: true)
         })
     }
     
-    func test_stopWithFailure_notifiesCallback() {
-        let (recorder, sut) = makeSUT()
+    func test_stopWithFailure_notifiesCallback() throws {
+        let (recorder, sut) = try makeSUT()
 
         expect(sut, toCompleteRecordingWith: false, when: {
             recorder.completeWith(flag: false)
         })
     }
     
-    func test_handleLevels_completeWithTimeAndPower() {
-        let (recorder, sut) = makeSUT()
+    func test_handleLevels_completeWithTimeAndPower() throws {
+        let (recorder, sut) = try makeSUT()
         let exp = expectation(description: "wait for level update")
-        var expectedIntervalAndPower: (TimeInterval, Float)?
+        var expectedIntervalAndPower: (interval: TimeInterval, level: Float)?
         
         recorder.completeWith(5.0, level: 10)
         
@@ -129,14 +129,14 @@ class AudioRecorderTests: XCTestCase {
         sut.handleLevels()
         
         wait(for: [exp], timeout: 0.1)
-        XCTAssertEqual(expectedIntervalAndPower?.0, 5.0)
-        XCTAssertEqual(expectedIntervalAndPower?.1, 10)
+        XCTAssertEqual(expectedIntervalAndPower?.interval, 5.0)
+        XCTAssertEqual(expectedIntervalAndPower?.level, 10)
     }
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
-        let recorder = try! AVAudioRecorderSpy()
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) throws -> (recorder: AVAudioRecorderSpy, sut: AudioRecorder) {
+        let recorder = try AVAudioRecorderSpy()
         let sut = AudioRecorder(recorder: recorder)
         trackForMemoryLeaks(recorder, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -161,7 +161,7 @@ class AudioRecorderTests: XCTestCase {
     }
 }
 
-class AVAudioRecorderSpy: Recorder {
+final class AVAudioRecorderSpy: Recording {
     enum Message {
         case record, prepareToRecord, stop
     }
@@ -169,13 +169,13 @@ class AVAudioRecorderSpy: Recorder {
     private let url: URL
     private let settings: [String : Any]
     var isMeteringEnabled: Bool = false
-    var currentTime: TimeInterval { timeIntervalAndLevel?.0 ?? 3.0 }
+    var currentTime: TimeInterval { timeIntervalAndLevel?.interval ?? 3.0 }
     
     weak var delegate: AVAudioRecorderDelegate?
     
     private(set) var messages = [Message]()
     private var didFinishWithSuccess: Bool?
-    private(set) var timeIntervalAndLevel: (TimeInterval, Float)?
+    private(set) var timeIntervalAndLevel: (interval: TimeInterval, level: Float)?
     
     required init(url: URL = URL.any, settings: [String: Any] = [:]) throws {
         self.url = url
@@ -209,7 +209,7 @@ class AVAudioRecorderSpy: Recorder {
     }
     
     func averagePower(forChannel channelNumber: Int) -> Float {
-        timeIntervalAndLevel?.1 ?? 3.0
+        timeIntervalAndLevel?.level ?? 3.0
     }
     
     func updateMeters() {}
